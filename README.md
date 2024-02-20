@@ -1,4 +1,4 @@
-# huddle - Discord/Teams/Blogger/Twitter mashup app
+;# huddle - Discord/Teams/Blogger/Twitter mashup app
 
 # Main Features:
   - You can create groups with people where you can post your project annoucments/info
@@ -7,6 +7,13 @@
   - Invites by code
 
 This is a school project
+
+# Tech stack:
+ - Backend
+   	- Node - express
+   	- Postgresql
+   	- db orm - ???
+ - React
 
 # Project Info
 # ROLES:
