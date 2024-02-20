@@ -13,7 +13,8 @@ This is a school project
    	- Node - express
    	- Postgresql
    	- db orm - ???
- - React
+ - Frontend
+   	- React
 
 # Project Info
 # ROLES:
