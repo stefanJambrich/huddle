@@ -1,4 +1,4 @@
-;# huddle - Discord/Teams/Blogger/Twitter mashup app
+# Huddle - Discord/Teams/Blogger/Twitter mashup app
 
 # Main Features:
   - You can create groups with people where you can post your project annoucments/info
