@@ -68,3 +68,12 @@ This is a school project
 	-Reacting to comment
 	-Generate invite link
 	-Change username/firstname etc...
+
+ # Priorities
+  - Basic db/server setup
+  - Login system (oauth)
+  - Groups - basic posts
+  - Groups - invite to group
+  - Groups - Comments/reacts
+  - Group lists
+  - Settings
