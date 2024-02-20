@@ -9,7 +9,7 @@
 This is a school project
 
 #Project Info
-##ROLES:
+#ROLES:
 	-Group Admin
 		-Delete all posts
 		-Delete all comments
@@ -24,7 +24,7 @@ This is a school project
 		-Comment
 		-Leave group
 
-##SITES:
+#SITES:
 	-Home/Dashboard
 		-Logged In
 			-Left side show all groups you are in - discordlike
@@ -57,7 +57,7 @@ This is a school project
 		-Modulo with invite code
 			-Invite expires after 24h
 
-##USE CASE
+#USE CASE
 	-Adding group
 	-Leaving group
 	-Posting annoucment
