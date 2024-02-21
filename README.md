@@ -76,10 +76,10 @@ This is a school project
 	-Change username/firstname etc...
 
  # Priorities
-  - Basic db/server setup
-  - Login system (oauth)
-  - Groups - basic posts
-  - Groups - invite to group
-  - Groups - Comments/reacts
-  - Group lists
-  - Settings
+  1. Basic db/server setup
+  2. Login system (oauth)
+  3. Groups - basic posts
+  4. Groups - invite to group
+  5. Groups - Comments/reacts
+  6. Group lists
+  7. Settings
