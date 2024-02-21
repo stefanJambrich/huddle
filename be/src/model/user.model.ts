@@ -1,7 +1,17 @@
-import { ARRAY, BLOB, INTEGER, STRING, UUID, UUIDV4 } from "sequelize";
+import { ARRAY, BLOB, INTEGER, Model, Optional, STRING } from "sequelize";
 import { sequelize } from "../db.connector";
+import { User as IUser } from "../type/user.type";
 
-const User = sequelize.define('user', {
+export class User extends Model<IUser> {
+    declare id: number;
+    declare firstname: string;
+    declare surname: string;
+    declare email: string;
+    declare password: string;
+    declare role: string;
+}
+
+User.init({
     id: {
         type: INTEGER,
         allowNull: false,
@@ -12,6 +22,8 @@ const User = sequelize.define('user', {
     surname: STRING(20),
     email: STRING,
     password: STRING,
-    role: STRING,
-    profile_picture: ARRAY(BLOB),
+    role: STRING
+}, {
+    sequelize,
+    modelName: 'users'
 });
