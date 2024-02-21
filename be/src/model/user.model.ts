@@ -4,7 +4,7 @@ import { sequelize } from "../db.connector";
 const Group = require('./group.model');
 const UserGroup = require('./userGroup.model');
 
-export const User = sequelize.define('users', {
+const User = sequelize.define('users', {
     id: {
         type: INTEGER,
         allowNull: false,
