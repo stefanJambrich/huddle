@@ -12,7 +12,7 @@ This is a school project
  - Backend
    	- Node - express
    	- Postgresql
-   	- db orm - ???
+   	- db orm - sequelize
  - Frontend
    	- React
 
