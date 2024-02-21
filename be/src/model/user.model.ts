@@ -1,29 +1,24 @@
-import { ARRAY, BLOB, INTEGER, Model, Optional, STRING } from "sequelize";
+import { INTEGER, STRING } from "sequelize";
 import { sequelize } from "../db.connector";
-import { User as IUser } from "../type/user.type";
 
-export class User extends Model<IUser> {
-    declare id: number;
-    declare firstname: string;
-    declare surname: string;
-    declare email: string;
-    declare password: string;
-    declare role: string;
-}
+const Group = require('./group.model');
+const UserGroup = require('./userGroup.model');
 
-User.init({
+export const User = sequelize.define('users', {
     id: {
         type: INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
     },
-    firstname: STRING(20),
-    surname: STRING(20),
+    firstname: STRING,
+    surname: STRING,
     email: STRING,
     password: STRING,
     role: STRING
-}, {
-    sequelize,
-    modelName: 'users'
 });
+
+User.belongsToMany(Group, { through: UserGroup });
+Group.belongsToMany(User, { through: UserGroup });
+
+module.exports = User;

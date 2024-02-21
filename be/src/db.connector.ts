@@ -15,6 +15,10 @@ export const sequelize = new Sequelize(
     },
 );
 
+const User = require('./model/user.model');
+const Group = require('./model/group.model');
+const UserGroup = require('./model/userGroup.model');
+
 (async () => {
     try {
         await sequelize.authenticate();
