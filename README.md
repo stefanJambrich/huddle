@@ -33,7 +33,7 @@ This is a school project
 		-Leave group
 
 # SITES:
-	-Home/Dashboard
+## Home/Dashboard
 		-Logged In
 			-Left side show all groups you are in - discordlike
 			-Left side, on top of all groups a button to add new group
@@ -46,7 +46,7 @@ This is a school project
 		-Not Logged In
 			-Show message saying to log in
 			-Google login
-	-Settings
+## Settings
 		-Be able to change:
 			-username
 			-first name
@@ -56,12 +56,10 @@ This is a school project
 			-profile picture
 		-Delete account
 		-Leave group/s
-	-Add group
+## Add group
 		-Field for pasting an invite code
 		-Accept button
-	-Accept invite
-		-Discord like - show name and number of users, accept button
-	-Send invite
+## Send invite
 		-Modulo with invite code
 			-Invite expires after 24h
 
