@@ -14,8 +14,10 @@ app.use(express.static('public'));
 
 const db = require('./db.connector');
 const userRoute = require('./route/user.route');
+const groupRoute = require('./route/group.route');
 
 app.use('/api/user', userRoute);
+app.use('/api/group', groupRoute);
 
 app.listen(port, () => {
   console.log(`Server is Fire at http://localhost:${port}`);
