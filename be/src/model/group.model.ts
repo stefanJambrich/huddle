@@ -1,7 +1,7 @@
 import { INTEGER, Model, Optional, STRING } from "sequelize";
 import { sequelize } from "../db.connector";
 
-const InviteCode = require('./invite_code.model');
+const InviteCode = require('./inviteCode.model');
 
 const Group = sequelize.define('groups', {
     id: {

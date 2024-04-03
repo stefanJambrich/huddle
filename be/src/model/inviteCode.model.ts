@@ -11,3 +11,5 @@ const InviteCode = sequelize.define('invite_code', {
     code: STRING,
     used: BOOLEAN
 });
+
+module.exports = InviteCode;
