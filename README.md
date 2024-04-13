@@ -1,5 +1,7 @@
 # Huddle - Discord/Teams/Blogger/Twitter mashup app
 
+# I needed to change my gitname because of work reasons, so the latest commits have the name DZCA1JH instead of my github name
+
 # Main Features:
   - You can create groups with people where you can post your project annoucments/info
   - Ability to moderate these groups
