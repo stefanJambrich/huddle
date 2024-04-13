@@ -2,6 +2,10 @@
 
 # I needed to change my gitname because of work reasons, so the latest commits have the name DZCA1JH instead of my github name
 
+# Authentication/Authorization
+  - Authentication is implemented only in a very basic manner, there are no JWT or cookies used, just a simple login, for a full fledged application it would be best to implement a system
+    like OAuth2 or create one from the scratch using JWTs, however I did not do this, because I think this is outside of the scope for this project
+
 # Main Features:
   - You can create groups with people where you can post your project annoucments/info
   - Ability to moderate these groups
