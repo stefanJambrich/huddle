@@ -15,7 +15,6 @@ const User = sequelize.define('users', {
     surname: STRING,
     email: STRING,
     password: STRING,
-    role: STRING
 });
 
 User.belongsToMany(Group, { through: UserGroup });

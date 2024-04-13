@@ -14,6 +14,6 @@ const Group = sequelize.define('groups', {
 });
 
 Group.hasMany(InviteCode);
-InviteCode.hasOne(Group);
+InviteCode.belongsTo(Group);
 
 module.exports = Group;

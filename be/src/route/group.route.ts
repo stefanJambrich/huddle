@@ -1,8 +1,9 @@
 import express  from "express";
-import { getAllUsersFromGroup } from "../controller/group.controller";
-
+import { addUserToGroup, createGroup, getGroup } from "../controller/group.controller";
 const router = express.Router();
 
-router.get('/:id', getAllUsersFromGroup);
+router.get('/:id', getGroup);
+router.post('/', createGroup);
+router.put('/addUser', addUserToGroup);
 
 module.exports = router;

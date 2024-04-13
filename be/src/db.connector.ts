@@ -18,6 +18,7 @@ export const sequelize = new Sequelize(
 const User = require('./model/user.model');
 const Group = require('./model/group.model');
 const UserGroup = require('./model/userGroup.model');
+const Role = require('./model/role.model');
 
 (async () => {
     try {
@@ -29,6 +30,11 @@ const UserGroup = require('./model/userGroup.model');
 })();
 
 (async () => {
-    await sequelize.sync();
-    console.log('juch');
+    //Setting force to true deletes all the tables on each reload of the server
+    await sequelize.sync({ force: false });
+    const rolesExist = await Role.findAll();
+    if (rolesExist.length <= 1) {
+        await Role.create({ name: 'ADMIN' });
+        await Role.create({ name: 'MEMBER' });
+    }
 })();

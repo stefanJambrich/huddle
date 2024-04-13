@@ -8,8 +8,13 @@ const InviteCode = sequelize.define('invite_code', {
         autoIncrement: true,
         primaryKey: true
     },
+    groupId: INTEGER,
     code: STRING,
-    used: BOOLEAN
+    used: {
+        type: BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    }
 });
 
 module.exports = InviteCode;
