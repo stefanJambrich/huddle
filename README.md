@@ -5,6 +5,7 @@
 # Authentication/Authorization
   - Authentication is implemented only in a very basic manner, there are no JWT or cookies used, just a simple login, for a full fledged application it would be best to implement a system
     like OAuth2 or create one from the scratch using JWTs, however I did not do this, because I think this is outside of the scope for this project
+  - Authorization is also a very basic without the use of any context, which is definetly not a great solution but without any proper login system this seemed like the only solution for this project
 
 # Main Features:
   - You can create groups with people where you can post your project annoucments/info
