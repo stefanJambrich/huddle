@@ -1,5 +1,12 @@
 # Huddle - Discord/Teams/Blogger/Twitter mashup app
 
+# I needed to change my gitname because of work reasons, so the latest commits have the name DZCA1JH instead of my github name
+
+# Authentication/Authorization
+  - Authentication is implemented only in a very basic manner. Just a simple login, for a full fledged application it would be best to implement a system
+    like OAuth2, however I did not do this, because I think this is outside of the scope for this project
+  - Authorization is also a very basic, which is definetly not a great solution but without any proper login system this seemed like the only solution for this project
+
 # Main Features:
   - You can create groups with people where you can post your project annoucments/info
   - Ability to moderate these groups
