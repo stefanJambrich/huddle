@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 const Announcement = require('../model/announcement.model');
+const Group = require('../model/group.model');
 
 export const getAnnouncements = async (req: Request, res: Response) => {
     const { groupId } = req.body;
@@ -19,6 +20,10 @@ export const createAnnouncement = async (req: Request, res: Response) => {
     if(!title || !content || !groupId) return res.status(400).send('Missing body');
 
     try {
+        const group = await Group.findOne({ where: { id: groupId } });
+        if (!group) return res.status(404).send('Group does not exist');
+        if (!group.maxAnnouncements) return res.status(400).send('Group does not allow any more announcements');
+        
         const announcement = await Announcement.create({ title, content, groupId, userId });
         res.status(201).send(announcement);
     } catch (error: any) {
