@@ -10,7 +10,12 @@ const Group = sequelize.define('groups', {
         autoIncrement: true,
         primaryKey: true
     },
-    name: STRING
+    name: STRING,
+    maxAnnouncements: {
+        type: INTEGER,
+        defaultValue: 5,
+        allowNull: false
+    }
 });
 
 Group.hasMany(InviteCode);

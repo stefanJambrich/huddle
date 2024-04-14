@@ -47,6 +47,6 @@ export const deleteInviteCode = async (req: Request, res: Response) => {
         await InviteCode.destroy({ where: { id: id } });
         res.status(204).send();
     } catch (error: any) {
-        res.status(404).send({ message: error.message });
+        res.status(500).send({ message: error.message });
     }
 }

@@ -33,7 +33,7 @@ export const createGroup = async (req: Request, res: Response) => {
 
         res.status(201).send(group);
     } catch (error: any) {
-        res.status(400).send({ message: error.message });
+        res.status(500).send({ message: error.message });
     }
 }
 
@@ -64,6 +64,6 @@ export const addUserToGroup = async (req: Request, res: Response) => {
 
         res.status(200).send("User added to group");
     } catch (error: any) {
-        res.status(404).send({ message: error.message });
+        res.status(500).send({ message: error.message });
     }
 }
