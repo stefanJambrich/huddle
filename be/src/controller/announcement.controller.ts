@@ -20,10 +20,10 @@ export const createAnnouncement = async (req: Request, res: Response) => {
     if(!title || !content || !groupId) return res.status(400).send('Missing body');
 
     try {
-        const group = await Group.findOne({ where: { id: groupId } });
+        const group = await Group.findOne({ where: { id: groupId }, include: Announcement});
         if (!group) return res.status(404).send('Group does not exist');
-        if (!group.maxAnnouncements) return res.status(400).send('Group does not allow any more announcements');
-        
+        if (group.announcements.length >= group.maxAnnouncements) return res.status(400).send('Group does not allow any more announcements');
+
         const announcement = await Announcement.create({ title, content, groupId, userId });
         res.status(201).send(announcement);
     } catch (error: any) {

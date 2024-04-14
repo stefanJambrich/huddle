@@ -12,11 +12,6 @@ const Announcement = sequelize.define('announcements', {
     content: {
         type: STRING,
         allowNull: false
-    },
-    active: {
-        type: BOOLEAN,
-        defaultValue: true,
-        allowNull: false
     }
 });
 
