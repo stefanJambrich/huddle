@@ -17,6 +17,7 @@ export const getUserById = async (req: Request, res: Response) => {
     }
 }
 
+/*
 export const createUser = async (req: Request, res: Response) => {
     const { firstname, surname, email, password } = req.body;
     if(!firstname || !surname || !email || !password) return res.status(400).send('Missing body');
@@ -28,7 +29,7 @@ export const createUser = async (req: Request, res: Response) => {
         res.status(500).send({ message: error.message });
     }
 }
-
+*/
 export const updateUser = async (req: Request, res: Response) => {
     const { id, firstname, surname, email, password } = req.body;
 
