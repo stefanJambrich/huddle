@@ -44,7 +44,7 @@ export const updateComment = async (req: Request, res: Response) => {
 }
 
 export const deleteComment = async (req: Request, res: Response) => {
-    const { commentId, userId, groupId } = req.body;
+    const { commentId, userId } = req.body;
     if(!commentId || !userId) return res.status(400).send('Missing body');
 
     try {
