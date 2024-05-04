@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
     const [groups, setGroups] = useState([]);
     const [groupModalIsOpen, setGroupModalIsOpen] = useState(false);
+    const [inviteModalIsOpen, setInviteModalIsOpen] = useState(false);
 
     const fetchGroups = async () => {
         const groups = await axios.get("http://localhost:8000/api/v1/group/all", {
@@ -14,7 +15,6 @@ const Home = () => {
             },
         });
         setGroups(groups.data);
-        console.log(groups.data);
     };
 
     const createGroup = async (e: any) => {
@@ -30,6 +30,19 @@ const Home = () => {
         setGroupModalIsOpen(false);
     };
 
+    const joinGroup = async (e: any) => {
+        e.preventDefault();
+        await axios.post("http://localhost:8000/api/v1/group/addUser", {
+            inviteCode: e.target[0].value,
+        }, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
+        fetchGroups();
+        setInviteModalIsOpen(false);
+    };
+
     useEffect(() => {
         fetchGroups();
     }, []);
@@ -39,7 +52,7 @@ const Home = () => {
             <h1>Home</h1>
             <div>
                 {groups.map((group: any) => (
-                    <Link key={group.id} to={`${group.id}`}>
+                    <Link key={group.id} to={`/${group.id}`}>
                         <h2>{group.name}</h2>
                     </Link>
                 ))}
@@ -53,9 +66,20 @@ const Home = () => {
                             <input type="text" placeholder="Group Name"/>
                             <button type="submit">Create</button>
                         </form>
+                        <button onClick={() => setGroupModalIsOpen(false)}>Close</button>
                     </Modal>
                 </div>
-                <button>Join a Group</button>
+                <div>
+                <button onClick={() => setInviteModalIsOpen(true)}>Join a Group</button>
+                    <Modal isOpen={inviteModalIsOpen}>
+                        <h2>Join a Group</h2>
+                        <form onSubmit={(event) => joinGroup(event)}>
+                            <input type="text" placeholder="Invite code"/>
+                            <button type="submit">Join</button>
+                        </form>
+                        <button onClick={() => setInviteModalIsOpen(false)}>Close</button>
+                    </Modal>
+                </div>
             </div>
         </div>
     );

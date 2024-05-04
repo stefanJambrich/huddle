@@ -8,11 +8,10 @@ const Login = () => {
         e.preventDefault();
         const userData = await axios.post("http://localhost:8000/api/v1/auth/login", {
             email: e.target[0].value,
-            password: e.target[1].value
+            password: e.target[1].value,
         });
 
         localStorage.setItem("token", userData.data.token);
-        localStorage.setItem("userId", userData.data.user.id);
         navigate("/");
     };
 
