@@ -8,6 +8,10 @@ const Comment = sequelize.define('comments', {
     content: {
         type: STRING,
         allowNull: false
+    },
+    username: {
+        type: STRING,
+        allowNull: false
     }
 });
 

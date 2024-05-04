@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 
 const Announcement = require('../model/announcement.model');
 const Group = require('../model/group.model');
+const Comment = require('../model/comment.model');
 
 export const getAnnouncements = async (req: Request, res: Response) => {
-    const { groupId } = req.body;
+    const { groupId } = req.params;
     if(!groupId) return res.status(400).send('Missing body');
 
     try {
-        const announcements = await Announcement.findAll({ where: { groupId: groupId } });
+        const announcements = await Announcement.findAll({ where: { groupId: groupId }, include: Comment });
         res.status(200).send(announcements);
     } catch (error: any) {
         res.status(500).send({ message: error.message });

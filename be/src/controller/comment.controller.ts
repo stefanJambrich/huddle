@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 const Comment = require('../model/comment.model');
+const User = require('../model/user.model');
 
 export const getComments = async (req: Request, res: Response) => {
     const { announcementId } = req.body;
@@ -19,7 +20,9 @@ export const createComment = async (req: Request, res: Response) => {
     if(!content || !announcementId) return res.status(400).send('Missing body');
 
     try {
-        const comment = await Comment.create({ content, announcementId, userId });
+        const user = await User.findOne({ where: { id: userId } });
+        const username = user.firstname + ' ' + user.surname;
+        const comment = await Comment.create({ content, username, announcementId, userId });
         res.status(201).send(comment);
     } catch (error: any) {
         res.status(500).send({ message: error.message });

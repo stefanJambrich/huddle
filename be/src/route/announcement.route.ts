@@ -3,7 +3,7 @@ import { createAnnouncement, deleteAnnouncement, getAnnouncements, updateAnnounc
 
 const router = express.Router();
 
-router.get('/', getAnnouncements);
+router.get('/:groupId', getAnnouncements);
 router.post('/', createAnnouncement);
 router.put('/', updateAnnouncement);
 router.delete('/', deleteAnnouncement);
