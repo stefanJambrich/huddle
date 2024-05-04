@@ -17,6 +17,18 @@ export const getGroup = async (req: Request, res: Response) => {
     }
 }
 
+export const getGroups = async (req: Request, res: Response) => {
+    const { userId } = req.body;
+    if(!userId) return res.status(400).send('Missing body');
+
+    try {
+        const user = await User.findOne({ where: { id: userId }, include: Group});
+        res.status(200).send(user.groups);
+    } catch (error: any) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
 export const createGroup = async (req: Request, res: Response) => {
     const { name, userId } = req.body;
     if(!name || !userId) return res.status(400).send('Missing body');
@@ -38,12 +50,14 @@ export const createGroup = async (req: Request, res: Response) => {
 }
 
 export const addUserToGroup = async (req: Request, res: Response) => {
-    const { userId, groupId, inviteCode } = req.body;
-    if(!userId || !groupId || !inviteCode) return res.status(400).send('Missing body');
+    const { userId, inviteCode } = req.body;
+    if(!userId || !inviteCode) return res.status(400).send('Missing body');
 
     try {
-        const groupInviteCodeExists = await InviteCode.findOne({where: { groupId: groupId, used: true }})
+        const groupInviteCodeExists = await InviteCode.findOne({where: { code: inviteCode }})
         if (groupInviteCodeExists) return res.status(400).send('Invalid invite code');
+
+        const groupId = groupInviteCodeExists.groupId;
 
         const userInGroup = await UserGroup.findOne({where: { groupId: groupId, userId: userId }});
         if (userInGroup) return res.status(400).send('User is already in the group');

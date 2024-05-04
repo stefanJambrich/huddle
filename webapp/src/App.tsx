@@ -1,16 +1,27 @@
-import { useState } from 'react'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import Home from './pages/Home/home.page'
+import Group from './pages/Group/group.page'
+import Login from './pages/Login/login.page'
+import Register from './pages/Register/register.page'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <h1>Vite + React</h1>
-      <button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<Navigate to={"/"} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<Group />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
-export default App
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
