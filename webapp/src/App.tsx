@@ -1,10 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home/home.page'
 import Group from './pages/Group/group.page'
 import Login from './pages/Login/login.page'
 import Register from './pages/Register/register.page'
+import './main.scss';
 
 const App = () => {
   return (

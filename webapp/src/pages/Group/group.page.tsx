@@ -35,6 +35,7 @@ const Group = () => {
         <GeneralLayout>
             <div>
                 <h1>Name: {group}</h1>
+                <button>Create announcement</button>
                 {announcements.map((announcement: any) => (
                     <div key={announcement.id}>
                         <h2>{announcement.title}</h2>

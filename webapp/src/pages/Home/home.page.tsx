@@ -48,16 +48,17 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Home</h1>
-            <div>
+        <div id="home-wrapper">
+            <div id="home-groups-wrapper">
+                <h1>Home</h1>
                 {groups.map((group: any) => (
-                    <Link key={group.id} to={`/${group.id}`}>
+                    <Link key={group.id} to={`/${group.id}`} id="group-name">
                         <h2>{group.name}</h2>
                     </Link>
                 ))}
             </div>
-            <div>
+            <div id="home-buttons-wrapper">
+                <h1>Welcome to Huddle :)</h1>
                 <div>
                     <button onClick={() => setGroupModalIsOpen(true)}>Create a new Group</button>
                     <Modal isOpen={groupModalIsOpen}>
