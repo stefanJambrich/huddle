@@ -68,6 +68,15 @@
             color: $black;
         }
 
+        span {
+            font-weight: bold;
+        }
+
+        p {
+            color: $darkPurple;
+            margin: 10px;
+        }
+
         form {
             margin-top: 10px;
             display: flex;

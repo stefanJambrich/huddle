@@ -11,7 +11,10 @@ export const getGroup = async (req: Request, res: Response) => {
 
     try {
         const group = await Group.findOne({ where: { id: id }, include: User});
-        res.status(200).send(group);
+        const userGroup = await UserGroup.findOne({ where: { userId: req.body.userId, groupId: id } });
+        const role = userGroup.dataValues.roleId === 1 ? "ADMIN" : "MEMBER";
+
+        res.status(200).send({group, role, userId: req.body.userId});
     } catch (error: any) {
         res.status(500).send({ message: error.message });
     }
@@ -77,6 +80,42 @@ export const addUserToGroup = async (req: Request, res: Response) => {
         await invite.save();
 
         res.status(200).send("User added to group");
+    } catch (error: any) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const kickUserFromGroup = async (req: Request, res: Response) => {
+    const { userId, groupId, userToKickId } = req.body;
+    if(!userId || !groupId || !userToKickId) return res.status(400).send('Missing body');
+
+    try {
+        const userGroup = await UserGroup.findOne({ where: { userId: userId, groupId: groupId } });
+        if (userGroup.roleId !== 1) return res.status(400).send('User is not an admin');
+
+        const userInGroup = await UserGroup.findOne({ where: { userId: userToKickId, groupId: groupId } });
+        if (!userInGroup) return res.status(400).send('User is not in the group');
+
+        await UserGroup.destroy({ where: { userId: userToKickId, groupId: groupId } });
+
+        res.status(204).send();
+    } catch (error: any) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const deleteGroup = async (req: Request, res: Response) => {
+    const { userId } = req.body;
+    const { id } = req.params;
+    if(!userId || !id) return res.status(400).send('Missing body');
+
+    try {
+        const userGroup = await UserGroup.findOne({ where: { userId: userId, groupId: id } });
+        if (userGroup.roleId !== 1) return res.status(400).send('User is not an admin or is not in group');
+
+        await Group.destroy({ where: { id: id } });
+
+        res.status(204).send();
     } catch (error: any) {
         res.status(500).send({ message: error.message });
     }

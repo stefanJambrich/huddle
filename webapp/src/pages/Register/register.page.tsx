@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -16,17 +16,20 @@ const Register = () => {
     }
 
     return (
-        <div id="register-wrapper">
-            <h1>Register</h1>
-            <form onSubmit={(event) => register(event)}>
-                <input type="text" placeholder="Firstname" />
-                <input type="text" placeholder="Surname" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button type="submit">Register</button>
-            </form>
+        <div id="login-wrapper">
+            <div id="login-content">
+                <h1>Register</h1>
+                <form onSubmit={(event) => register(event)}>
+                    <input type="text" placeholder="Firstname" />
+                    <input type="text" placeholder="Surname" />
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Password" />
+                    <button type="submit">Register</button>
+                    <Link to={"/login"}>Already have an existing account?</Link>
+                </form>
+            </div>
         </div>
     );
 }
- 
+
 export default Register;

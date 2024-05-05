@@ -31,7 +31,7 @@ export const generateInviteCode = async (req: Request, res: Response) => {
         if (!groupExists) return res.status(400).send('Group does not exist');
 
         const groupInviteCodeExists = await InviteCode.findOne({where: { groupId: groupId, used: false }})
-        if (groupInviteCodeExists) return res.status(400).send(groupInviteCodeExists);
+        if (groupInviteCodeExists) return res.status(200).send(groupInviteCodeExists);
 
         const inviteCode = await InviteCode.create({ code: randomUUID(), used: false, groupId: groupId});
         return res.status(201).send(inviteCode);

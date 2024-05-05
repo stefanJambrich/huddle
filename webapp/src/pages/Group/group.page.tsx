@@ -3,6 +3,7 @@ import GeneralLayout from "../../layouts/general.layout";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
+import { Role } from "../../types/role.type";
 
 const Group = () => {
     const { id } = useParams();
@@ -12,6 +13,7 @@ const Group = () => {
     const [commentModalIsOpen, setCommentModalIsOpen] = useState(false);
     const [inviteModalIsOpen, setInviteModalIsOpen] = useState(false);
     const [inviteCode, setInviteCode] = useState();
+    const [role, setRole] = useState<Role>("MEMBER");
 
     const fetchGroup = async () => {
         const group = await axios.get(`http://localhost:8000/api/v1/group/find/${id}`, {
@@ -19,7 +21,8 @@ const Group = () => {
                 Authorization: `${localStorage.getItem("token")}`,
             },
         });
-        setGroup(group.data.name);
+        setRole(group.data.role);
+        setGroup(group.data.group.name);
     };
 
     const fetchAnnouncements = async () => {
@@ -66,8 +69,17 @@ const Group = () => {
                 Authorization: `${localStorage.getItem("token")}`,
             },
         });
-        console.log(inviteCode);
-        setInviteCode(inviteCode.data.inviteCode);
+        console.log(inviteCode.data);
+        setInviteCode(inviteCode.data.code);
+    }
+
+    const deleteGroup = async () => {
+        await axios.delete(`http://localhost:8000/api/v1/group/${id}`, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
+        window.location.href = "/";
     }
 
     useEffect(() => {
@@ -86,11 +98,12 @@ const Group = () => {
                         <Modal isOpen={inviteModalIsOpen} className={"modal"}>
                             <div>
                                 <h2>Generate Invite code</h2>
-                                <p>{inviteCode}</p>
+                                <p><span>Invite Code: </span>{inviteCode}</p>
                                 <button type="submit" onClick={() => generateInviteCode()}>Generate</button>
                                 <button onClick={() => setInviteModalIsOpen(false)}>Close</button>
                             </div>
                         </Modal>
+                        {role === "ADMIN" ? <button onClick={() => deleteGroup()}>Delete Group</button> : null}
                     </div>
                 </div>
                 <Modal isOpen={annModalIsOpen} className={"modal"}>

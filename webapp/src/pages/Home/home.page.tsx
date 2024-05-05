@@ -32,7 +32,7 @@ const Home = () => {
 
     const joinGroup = async (e: any) => {
         e.preventDefault();
-        await axios.post("http://localhost:8000/api/v1/group/addUser", {
+        await axios.put("http://localhost:8000/api/v1/group/addUser", {
             inviteCode: e.target[0].value,
         }, {
             headers: {
@@ -42,6 +42,11 @@ const Home = () => {
         fetchGroups();
         setInviteModalIsOpen(false);
     };
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+    }
 
     useEffect(() => {
         fetchGroups();
@@ -85,6 +90,7 @@ const Home = () => {
                         </div>
                     </Modal>
                 </div>
+                <button onClick={() => logout()}>Logout</button>
             </div>
         </div>
     );

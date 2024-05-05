@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -17,12 +17,15 @@ const Login = () => {
 
     return (
         <div id="login-wrapper">
-            <h1>Login</h1>
-            <form onSubmit={(event) => login(event)}>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button type="submit">Login</button>
-            </form>
+            <div id="login-content">
+                <h1>Login</h1>
+                <form onSubmit={(event) => login(event)}>
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Password" />
+                    <button type="submit">Login</button>
+                </form>
+                <Link to={"/register"}>Create a new account</Link>
+            </div>
         </div>
     );
 };
