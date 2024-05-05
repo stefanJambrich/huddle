@@ -2,11 +2,16 @@ import { useParams } from "react-router-dom";
 import GeneralLayout from "../../layouts/general.layout";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Modal from "react-modal";
 
 const Group = () => {
     const { id } = useParams();
     const [group, setGroup] = useState();
     const [announcements, setAnnouncements] = useState([]);
+    const [annModalIsOpen, setAnnModalIsOpen] = useState(false);
+    const [commentModalIsOpen, setCommentModalIsOpen] = useState(false);
+    const [inviteModalIsOpen, setInviteModalIsOpen] = useState(false);
+    const [inviteCode, setInviteCode] = useState();
 
     const fetchGroup = async () => {
         const group = await axios.get(`http://localhost:8000/api/v1/group/find/${id}`, {
@@ -26,6 +31,45 @@ const Group = () => {
         setAnnouncements(announcements.data);
     };
 
+    const createAnnouncement = async (e: any) => {
+        e.preventDefault();
+        await axios.post("http://localhost:8000/api/v1/announcement/", {
+            title: e.target[0].value,
+            content: e.target[1].value,
+            groupId: id,
+        }, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
+        fetchAnnouncements();
+        setAnnModalIsOpen(false);
+    };
+
+    const createComment = async (e: any, announcementId: number) => {
+        e.preventDefault();
+        await axios.post("http://localhost:8000/api/v1/comment/", {
+            content: e.target[0].value,
+            announcementId: announcementId,
+        }, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
+        fetchAnnouncements();
+        setCommentModalIsOpen(false);
+    }
+
+    const generateInviteCode = async () => {
+        const inviteCode = await axios.get(`http://localhost:8000/api/v1/inviteCode/generate/${id}`, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
+        console.log(inviteCode);
+        setInviteCode(inviteCode.data.inviteCode);
+    }
+
     useEffect(() => {
         fetchGroup();
         fetchAnnouncements();
@@ -34,14 +78,48 @@ const Group = () => {
     return (
         <GeneralLayout>
             <div>
-                <h1>Name: {group}</h1>
-                <button>Create announcement</button>
+                <div id="group-top-wrapper">
+                    <h1>{group}</h1>
+                    <div>
+                        <button onClick={() => setAnnModalIsOpen(true)}>New Post</button>
+                        <button id="invite-code-btn" onClick={() => setInviteModalIsOpen(true)}>Generate Invite Code</button>
+                        <Modal isOpen={inviteModalIsOpen} className={"modal"}>
+                            <div>
+                                <h2>Generate Invite code</h2>
+                                <p>{inviteCode}</p>
+                                <button type="submit" onClick={() => generateInviteCode()}>Generate</button>
+                                <button onClick={() => setInviteModalIsOpen(false)}>Close</button>
+                            </div>
+                        </Modal>
+                    </div>
+                </div>
+                <Modal isOpen={annModalIsOpen} className={"modal"}>
+                    <div>
+                        <h2>New Post</h2>
+                        <form onSubmit={(event) => createAnnouncement(event)}>
+                            <input type="text" placeholder="Title" />
+                            <textarea placeholder="Content" />
+                            <button type="submit">Post</button>
+                        </form>
+                        <button onClick={() => setAnnModalIsOpen(false)}>Close</button>
+                    </div>
+                </Modal>
                 {announcements.map((announcement: any) => (
-                    <div key={announcement.id}>
+                    <div key={announcement.id} id="post-wrapper">
                         <h2>{announcement.title}</h2>
                         <p>{announcement.content}</p>
-                        <button>Add comment</button>
-                        <div>
+                        <button id="new-comment-btn" onClick={() => setCommentModalIsOpen(true)}>Add comment</button>
+                        <Modal isOpen={commentModalIsOpen} className={"modal"}>
+                            <div>
+                                <h2>New Post</h2>
+                                <form onSubmit={(event) => createComment(event, announcement.id)}>
+                                    <textarea placeholder="Content" />
+                                    <button type="submit">Post</button>
+                                </form>
+                                <button onClick={() => setCommentModalIsOpen(false)}>Close</button>
+                            </div>
+                        </Modal>
+                        <div id="comment-wrapper">
                             <h2>Comments:</h2>
                             {announcement.comments.map((comment: any) => (
                                 <div key={comment.id}>
@@ -49,7 +127,7 @@ const Group = () => {
                                     <p>{comment.content}</p>
                                 </div>
                             ))}
-                        </div> 
+                        </div>
                     </div>
                 ))}
             </div>

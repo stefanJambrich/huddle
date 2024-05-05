@@ -1,0 +1,105 @@
+#layout-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+
+    #content-wrapper {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            margin-top: 20px;
+            width: 85%;
+
+            #group-top-wrapper {
+                margin: 0;
+                display: flex;
+                flex-direction: row;
+                border-bottom: 4px solid $lightPurple;
+                margin-bottom: 20px;
+                align-items: center;
+                justify-content: space-between;
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    width: 40%;
+                    margin: 0;
+
+                    button {
+                        width: 120px;
+                        height: 40px;
+                    }
+
+                    #invite-code-btn {
+                        width: 200px;
+                    }
+                }
+            }
+
+            #post-wrapper {
+                display: flex;
+                border: 4px solid $lightPurple;
+                background-color: $darkerWhite;
+                border-radius: 10px;
+                padding: 20px;
+
+                h2 {
+                    margin-bottom: 10px;
+                }
+
+                button {
+                    width: 150px;
+                    height: 30px;
+                    margin-top: 20px;
+                }
+
+                #comment-wrapper {
+                    background-color: rgb(233, 232, 232);
+                    padding: 20px;
+                    border-radius: 10px;
+
+                    h3 {
+                        color: $lightPurple;
+                    }
+                }
+            }
+        }
+    }
+
+    #member-wrapper {
+        width: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: $darkerWhite;
+        border-radius: 20px;
+        margin: 10px;
+        
+
+        #member {
+            width: 100%;
+        }
+
+        #member > div > h2 {
+            color: $lightPurple;
+            margin: 20px;
+            border-left: 4px solid $darkPurple;
+            text-align: center;
+            padding-left: 10px;
+            width: fit-content;
+            margin-left: 35px;
+        }
+    }
+}
+
+#new-comment-btn {
+    width: 150px;
+    height: 40px;
+}

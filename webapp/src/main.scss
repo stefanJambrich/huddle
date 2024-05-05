@@ -6,6 +6,7 @@ $white: #FFFFFF;
 $darkerWhite: rgb(247, 244, 244);
 
 @import './pages/Home/home.scss';
+@import './pages/Group/group.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
@@ -22,4 +23,17 @@ body {
 
 h1 {
     color: $darkPurple;
+}
+
+button {
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: $darkPurple;
+    color: $white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    border: transparent;
 }

@@ -21,12 +21,11 @@ const MemberList = () => {
     }, [id])
 
     return (
-        <div>
-            <h2>Members:</h2>
-            <div>
+        <div id="member-wrapper">
+            <div id="member">
                 {members.map((member: any) => (
                     <div key={member.id}>
-                        <h2>{member.firstname + member.surname}</h2>
+                        <h2>{member.firstname + ' ' + member.surname}</h2>
                     </div>
                 ))}
             </div>

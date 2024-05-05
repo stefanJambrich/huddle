@@ -55,7 +55,7 @@ export const addUserToGroup = async (req: Request, res: Response) => {
 
     try {
         const groupInviteCodeExists = await InviteCode.findOne({where: { code: inviteCode }})
-        if (groupInviteCodeExists) return res.status(400).send('Invalid invite code');
+        if (!groupInviteCodeExists) return res.status(400).send('Invalid invite code');
 
         const groupId = groupInviteCodeExists.groupId;
 
