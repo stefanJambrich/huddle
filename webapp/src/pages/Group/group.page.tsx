@@ -82,6 +82,15 @@ const Group = () => {
         window.location.href = "/";
     }
 
+    const deleteAnnouncement = async (announcementId: number) => {
+        await axios.delete(`http://localhost:8000/api/v1/announcement/?announcementId=${announcementId}&groupId=${id}`, {
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        });
+        fetchAnnouncements();
+    }
+
     useEffect(() => {
         fetchGroup();
         fetchAnnouncements();
@@ -119,7 +128,10 @@ const Group = () => {
                 </Modal>
                 {announcements.map((announcement: any) => (
                     <div key={announcement.id} id="post-wrapper">
-                        <h2>{announcement.title}</h2>
+                        <div id="title-wrapper">
+                            <h2>{announcement.title}</h2>
+                            {role === "ADMIN" ? <button onClick={() => deleteAnnouncement(announcement.id)}>Delete</button> : null}
+                        </div>
                         <p>{announcement.content}</p>
                         <button id="new-comment-btn" onClick={() => setCommentModalIsOpen(true)}>Add comment</button>
                         <Modal isOpen={commentModalIsOpen} className={"modal"}>

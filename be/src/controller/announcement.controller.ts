@@ -51,7 +51,8 @@ export const updateAnnouncement = async (req: Request, res: Response) => {
 }
 
 export const deleteAnnouncement = async (req: Request, res: Response) => {
-    const { announcementId, userId, groupId } = req.body;
+    const { userId } = req.body;
+    const { announcementId, groupId } = req.query;
     if(!announcementId || !userId || !groupId) return res.status(400).send('Missing body');
 
     try {

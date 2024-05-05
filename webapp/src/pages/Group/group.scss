@@ -50,8 +50,25 @@
                 border-radius: 10px;
                 padding: 20px;
 
-                h2 {
-                    margin-bottom: 10px;
+                #title-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    button {
+                        margin: 0;
+                        width: fit-content;
+                        padding: 10px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    h2 {
+                        margin-bottom: 10px;
+                    }
                 }
 
                 button {
